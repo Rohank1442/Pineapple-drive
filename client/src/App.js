@@ -12,7 +12,7 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => { 
+  useEffect(() => {
     // It helps to read data from the blockchain
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const loadProvider = async () => {
@@ -30,11 +30,13 @@ function App() {
         const address = await signer.getAddress();
         setAccount(address);
         let contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+
         const contract = new ethers.Contract(
           contractAddress,
           Upload.abi,
           signer
         );
+
         console.log(contract);
         setContract(contract)
         setProvider(provider)
@@ -47,24 +49,25 @@ function App() {
   }, []);
   return (
     <>
-    {!modalOpen && (
-      <button className="share" onClick={() => setModalOpen(true)}>
-        Share
-      </button>
-    )}
-    {modalOpen && (
-      <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
-    )}
+      {!modalOpen && (
+        <button className="share" onClick={() => setModalOpen(true)}>
+          Share
+        </button>
+      )}
+      {modalOpen && (
+        <Modal setModalOpen={setModalOpen} contract={contract}></Modal>
+      )}
       <div className="App">
         <h1 style={{ color: "#1DC071" }}>Pineapple Drive</h1>
         <div class="bg"></div>
-
         <p style={{ color: "white" }}>Account : {account ? account : "Not connected"}</p>
+
         <FileUpload
           account={account}
           provider={provider}
           contract={contract}
         ></FileUpload>
+
         <Display
           account={account}
           contract={contract}

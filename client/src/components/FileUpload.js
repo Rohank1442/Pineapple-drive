@@ -16,15 +16,17 @@ const FileUpload = ({ contract, account, provider }) => {
                     url: "https://api.pinata.cloud/pinning/pinFileToIPFS",
                     data: formData,
                     headers: {
-                        pinata_api_key: `5fd1afa23e590062831b`,
-                        pinata_secret_api_key: `dc4e157655589e3148aad3fe868a82d30c1e661c9bd1e90b7810fb76344af50c`,
+                        pinata_api_key: `9e78ba31429bfcd47632`,
+                        pinata_secret_api_key: `00b0917dd1f912d0ecf0ff83563eeda1048bccc228006f7ab428a50da7342562`,
                         "Content-Type": "multipart/form-data",
                     },
                 });
                 // const ImgHash = `https://gateway.pinata.cloud/ipfs/${resFile.data.IpfsHash}`;
                 const ImgHash = `ipfs://${resFile.data.IpfsHash}`;
-                const signer = contract.connect(provider.getSigner());
-                signer.add(account, ImgHash);  // Storing Image Hash on Blockchain
+                contract.add(account, ImgHash);
+                alert("Successfully Image Uploaded");
+                setFileName("No image selected");
+                setFile(null);
             }
             catch (e) {
                 alert("Unable to upload image on pinata");
@@ -34,6 +36,7 @@ const FileUpload = ({ contract, account, provider }) => {
         setFileName("No Image Selected");
         setFile(null);
     };
+    
     const retrieveFile = (e) => {
         const data = e.target.files[0];
         console.log(data);

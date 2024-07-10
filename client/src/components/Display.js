@@ -17,13 +17,8 @@ const Display = ({ contract, account }) => {
         } catch (e) {
             alert("You don't have access");
         }
-        console.log("1");
-        // Object.keys({ 'key': 'value' })
-        // if (window.dataArray) {
-        //     Object.assign(window.dataArray, {})
-        // }
+
         const isEmpty = Object.keys(dataArray).length == 0;
-        // account.toString();
         console.log("2");
         console.log(isEmpty);
         console.log("3");
